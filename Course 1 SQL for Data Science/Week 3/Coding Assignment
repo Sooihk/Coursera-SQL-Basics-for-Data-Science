@@ -1,0 +1,61 @@
+1. What is the title of the 8th track?
+
+SELECT Name, AlbumId
+FROM Tracks
+WHERE AlbumId IN (SELECT AlbumId
+    FROM Albums
+    WHERE Title = 'Californication');
+    
+2. Find the total number of invoices for each customer along with the customer's full name, city and email.
+
+SELECT FirstName, LastName, City, Email, COUNT(i.InvoiceId) AS TotalInvoices
+FROM Customers AS c
+LEFT JOIN Invoices AS i 
+ON c.CustomerId = i.CustomerId
+GROUP BY c.CustomerId;
+
+3. Retrieve the track name, album, artistID, and trackID for all the albums.
+
+SELECT t.Name AS TrackName, a.Title AS Album, a.ArtistId, t.TrackId
+FROM Tracks AS t 
+LEFT JOIN Albums AS a 
+ON t.AlbumId = a.AlbumId
+ORDER BY a.ArtistId
+
+4. Retrieve a list with the managers last name, and the last name of the employees who report to him or her.
+
+SELECT e.LastName AS EmployeeLastName, m.LastName AS ManagerLastName 
+FROM Employees AS e 
+LEFT JOIN Employees AS m 
+ON e.ReportsTo = m.EmployeeId;
+
+5. Find the name and ID of the artists who do not have albums. 
+
+SELECT ar.Name, ar.ArtistId 
+
+FROM Artists AS ar 
+LEFT JOIN Albums AS al 
+ON ar.ArtistId = al.ArtistId 
+WHERE al.AlbumId IS NULL;
+
+6. Use a UNION to create a list of all the employee's and customer's first names and last names ordered by the last name in descending order.
+
+SELECT LastName, FirstName
+FROM Employees 
+UNION
+SELECT LastName, FirstName 
+FROM Customers 
+ORDER BY LastName DESC;
+
+7. See if there are any customers who have a different city listed in their billing city versus their customer city.
+
+SELECT c.FirstName, c.LastName, c.City AS CustomerCity, i.BillingCity
+FROM Customers AS c 
+LEFT JOIN Invoices AS i 
+ON c.CustomerId = i.CustomerId 
+WHERE c.City <> i.BillingCity;
+
+
+
+
+
