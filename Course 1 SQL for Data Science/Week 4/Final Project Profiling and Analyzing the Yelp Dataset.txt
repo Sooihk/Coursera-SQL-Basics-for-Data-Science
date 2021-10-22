@@ -256,9 +256,6 @@ Copy and Paste the Resulting Table Below (2 columns â€“ star rating and cou
 	| Lissa     |  120 |
 	+-----------+------+
 		
-https://chaolidotblog.files.wordpress.com/2018/11/yelp_dataset_sql_lookup.pdf
-https://github.com/MerEsf/DataScience_SQL/blob/master/SQL%20for%20data%20Science%20Project.txt
-
 Part 2: Inferences and Analysis
 
 1. Pick one city and category of your choice and group the businesses in that city or category by their overall star rating. Compare the businesses with 2-3 stars to the businesses with 4-5 stars and answer the following questions. Include your code.
