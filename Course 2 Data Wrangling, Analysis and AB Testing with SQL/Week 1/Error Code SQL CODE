@@ -1,0 +1,46 @@
+/*Exercise 1*/
+SELECT id AS user_id, email_address 
+FROM dsv1069.users
+WHERE deleted_at IS NULL 
+
+/*Exercie 2*/
+SELECT category, COUNT(id) as item_count
+FROM dsv1069.items
+GROUP BY category
+ORDER BY item_count DESC;
+
+/*Exercise 3*/
+SELECT * 
+FROM dsv1069.orders as orders
+LEFT JOIN dsv1069.users as users
+ON orders.user_id = users.id
+
+/*Exercise 4*/
+SELECT COUNT(DISTINCT event_id) as viewed_item
+FROM dsv1069.events
+WHERE event_name = 'view_item'
+
+/*Exercise 5*/ 
+SELECT COUNT(DISTINCT item_id) as item_count
+FROM dsv1069.orders
+
+/*Exercise 6*/
+SELECT users.id  as user_id, MIN(orders.paid_at) as min_paid_at
+FROM dsv1069.users 
+LEFT OUTER JOIN dsv1069.orders
+ON users.id = orders.user_id 
+GROUP BY users.id
+
+--Exercise 7
+SELECT (CASE WHEN first_view IS NULL THEN false ELSE true END) AS has_viewed_profile_page, COUNT(user_id) as users
+FROM 
+  (
+  SELECT users.id AS user_id, MIN(event_time) AS first_view 
+   FROM dsv1069.users 
+   LEFT OUTER JOIN dsv1069.events 
+   ON users.id = events.user_id
+   AND events.event_name = 'view_user_profile'
+   GROUP BY users.id 
+   ) AS first_profile_views
+GROUP BY 
+  (CASE WHEN first_view IS NULL THEN false ELSE true END)
