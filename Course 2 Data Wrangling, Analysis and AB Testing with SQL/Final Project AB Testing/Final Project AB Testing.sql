@@ -126,8 +126,7 @@ FROM
 GROUP BY order_binary.test_assignment
 
 
--- Use this table to 
--- compute view_binary for the 30 day window after the test_start_date
+-- Use this table to compute view_binary for the 30 day window after the test_start_date
 -- for the test named item_test_2
 
 SELECT 
